@@ -4,4 +4,4 @@ metadata:
   name: rh-datagrid
   namespace: datagrid
 spec:
-  replicas: 1
+  replicas: 2
