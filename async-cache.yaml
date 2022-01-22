@@ -1,0 +1,9 @@
+apiVersion: infinispan.org/v2alpha1
+kind: Cache
+metadata:
+  name:async-cache-definition
+spec:
+  clusterName: rh-datagrid
+  name: async-cache
+  templateName: org.infinispan.DIST_ASYNC
+

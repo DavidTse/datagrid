@@ -1,0 +1,10 @@
+apiVersion: infinispan.org/v2alpha1
+kind: Cache
+metadata:
+  name:sync-cache-definition
+spec:
+  replicas: 2
+  clusterName: rh-datagrid
+  name: sync-cache
+  templateName: org.infinispan.DIST_SYNC
+
