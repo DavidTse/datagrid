@@ -29,6 +29,7 @@ spec:
       org.jgroups: trace
   expose:
     type: LoadBalancer
+    port: 65535
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
