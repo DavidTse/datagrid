@@ -5,4 +5,4 @@ metadata:
 spec:
   clusterName: rh-datagrid
   name: sync-cache
-  template: <distributed-cache name="sync-cache" mode="SYNC"></distributed-cache>
+  template: <distributed-cache name="sync-cache" owners="2" segments="256" capacity-factor="1.0" mode="SYNC" statistics="true"><expiration lifespan="600000" /><eviction strategy="LIRS" type="MEMORY" size="1000000" /></distributed-cache>
