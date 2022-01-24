@@ -29,7 +29,6 @@ spec:
       org.jgroups: trace
   expose:
     type: Route
-    host: 65535
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
