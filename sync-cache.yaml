@@ -2,7 +2,9 @@ apiVersion: infinispan.org/v2alpha1
 kind: Cache
 metadata:
   name: sync-cache
+  namespace: datagrid
 spec:
+  adminAuth:
+    secretName: basic-auth
   clusterName: rh-datagrid
   name: sync-cache
-  template: <distributed-cache name="sync-cache" owners="2" segments="256" capacity-factor="1.0" mode="SYNC" statistics="true"><expiration lifespan="600000" /><eviction strategy="LIRS" type="MEMORY" size="1000000" /></distributed-cache>
