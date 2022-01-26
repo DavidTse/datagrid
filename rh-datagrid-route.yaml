@@ -1,42 +1,12 @@
-apiVersion: infinispan.org/v1
-kind: Infinispan
+apiVersion: route.openshift.io/v1
+kind: Route
 metadata:
-  name: rh-datagrid
-  annotations:
-    infinispan.org/monitoring: 'true'
+  name: rh-datagrid-external
+  namespace: datagrid
 spec:
-  replicas: 2
-  service:
-    type: Cache
-    replicationFactor: 2
-  autoscale:
-    maxMemUsagePercent: 70
-    maxReplicas: 5
-    minMemUsagePercent: 30
-    minReplicas: 2
-  security:
-    endpointSecretName: endpoint-identities
-    endpointEncryption:
-        type: Secret
-        certSecretName: tls-secret
-  container:
-    extraJvmOpts: "-XX:NativeMemoryTracking=summary"
-    cpu: "2000m"
-    memory: 1Gi
-  logging:
-    categories:
-      org.infinispan: trace
-      org.jgroups: trace
-  expose:
-    type: Route
-  affinity:
-    podAntiAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-      - weight: 100
-        podAffinityTerm:
-          labelSelector:
-            matchLabels:
-              app: infinispan-pod
-              clusterName: rh-datagrid
-              infinispan_cr: rh-datagrid
-          topologyKey: "kubernetes.io/hostname"
+  path: /
+  to:
+    kind: Service
+    name: rh-datagrid-external
+  port:
+    targetPort: 80
