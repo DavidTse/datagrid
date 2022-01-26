@@ -14,12 +14,11 @@ oc apply -f rh-datagrid-external.yaml
 oc apply -f rh-datagrid-route.yaml
 
 
-credentials:
+# Credentials
+get username & password from rh-datagrid-generated-secret
 
-get username & password from
 
-
-Test:
+# Test
 Go to a terminal in a pod, e.g.,  rh-datagrid-0
 
 curl -k -v -u developer:htKRAuhLOKKi9YXl https://rh-datagrid:11222/rest/v2/caches
