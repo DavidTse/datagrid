@@ -7,4 +7,6 @@ oc apply -f infinispan-cluster.yaml
 
 oc apply -f sync-cache.yaml
 
-oc apply -f async-cache.yaml
+oc apply -f rh-datagrid-external.yaml
+
+oc apply -f rh-datagrid-route.yaml
