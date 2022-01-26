@@ -1,0 +1,14 @@
+﻿apiVersion: infinispan.org/v2alpha1
+kind: Batch
+metadata:
+  name: batch-cache
+  namespace: datagrid
+spec:
+  cluster: rh-datagrid
+  config: |
+    create cache --template=org.infinispan.DIST_ASYNC asynccache
+    put --cache=asynccache hello world
+    put --cache=asynccache hola mundo
+    create cache --template=org.infinispan.DIST_SYNC synccache
+    put --cache=synccache hello world
+    put --cache=synccache hola mundo
