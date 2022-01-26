@@ -1,6 +1,4 @@
-# datagrid
-Usage:
-
+# Datagrid Installation
 oc new-project datagrid
 
 oc apply -f infinispan-cluster.yaml
