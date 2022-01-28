@@ -28,7 +28,7 @@ spec:
       org.infinispan: trace
       org.jgroups: trace
   expose:
-    type: LoadBalancer
+    type: Route
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
