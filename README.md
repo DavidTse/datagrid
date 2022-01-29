@@ -22,7 +22,7 @@ Go to a terminal in a pod, e.g.,  rh-datagrid-0
 
 curl -k -v -u developer:htKRAuhLOKKi9YXl https://rh-datagrid:11222/rest/v2/caches (Internal)
 
-curl -k -v -u developer:htKRAuhLOKKi9YXl https://<hostname>/rest/v2/caches (External)
+curl -k -v -u developer:htKRAuhLOKKi9YXl https://$hostname/rest/v2/caches (External)
 
 /rest/v2/caches/synccache
 
