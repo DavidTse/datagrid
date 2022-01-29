@@ -9,6 +9,8 @@ oc apply -f sync-cache.yaml
 
 oc apply -f batch-cache.yaml
 
+oc apply -f sync-cache-xml.yaml (work in progress)
+
 oc get svc
 
 oc get route
