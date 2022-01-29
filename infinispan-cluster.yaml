@@ -2,6 +2,7 @@ apiVersion: infinispan.org/v1
 kind: Infinispan
 metadata:
   name: rh-datagrid
-  namespace: datagrid
 spec:
+  service:
+    type: DataGrid
   replicas: 2

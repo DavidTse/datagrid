@@ -5,4 +5,4 @@ metadata:
 spec:
   clusterName: rh-datagrid
   name: async-cache
-  template: <distributed-cache name="async-cache" owners="2" segments="256" capacity-factor="1.0" mode="ASYNC" statistics="true"><expiration lifespan="600000" /><eviction strategy="LIRS" type="COUNT" size="1000" /></distributed-cache>
+  templateName: org.infinispan.DIST_ASYNC

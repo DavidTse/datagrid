@@ -1,12 +1,10 @@
-apiVersion: route.openshift.io/v1
-kind: Route
+apiVersion: infinispan.org/v1
+kind: Infinispan
 metadata:
-  name: rh-datagrid-external
-  namespace: datagrid
+  name: rh-datagrid
 spec:
-  path: /
-  to:
-    kind: Service
-    name: rh-datagrid-external
-  port:
-    targetPort: 80
+  expose:
+    type: Route
+  service:
+    type: DataGrid
+  replicas: 2

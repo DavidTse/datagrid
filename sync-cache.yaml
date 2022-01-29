@@ -2,9 +2,9 @@ apiVersion: infinispan.org/v2alpha1
 kind: Cache
 metadata:
   name: sync-cache
-  namespace: datagrid
 spec:
   adminAuth:
     secretName: basic-auth
   clusterName: rh-datagrid
   name: sync-cache
+  templateName: org.infinispan.DIST_SYNC

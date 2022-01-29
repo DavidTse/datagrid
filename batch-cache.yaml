@@ -2,7 +2,6 @@
 kind: Batch
 metadata:
   name: batch-cache
-  namespace: datagrid
 spec:
   cluster: rh-datagrid
   config: |
