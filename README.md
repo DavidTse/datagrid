@@ -1,16 +1,17 @@
 # Datagrid Installation
 oc new-project datagrid
 
-oc apply -f infinispan-cluster.yaml
+oc apply -f rh-datagrid-route.yaml
+
+oc apply -f async-cache.yaml
 
 oc apply -f sync-cache.yaml
 
 oc apply -f batch-cache.yaml
 
-oc apply -f rh-datagrid-external.yaml
+oc get svc
 
-oc apply -f rh-datagrid-route.yaml
-
+oc get route
 
 # Credentials
 get username & password from rh-datagrid-generated-secret
@@ -19,7 +20,9 @@ get username & password from rh-datagrid-generated-secret
 # Test
 Go to a terminal in a pod, e.g.,  rh-datagrid-0
 
-curl -k -v -u developer:htKRAuhLOKKi9YXl https://rh-datagrid:11222/rest/v2/caches
+curl -k -v -u developer:htKRAuhLOKKi9YXl https://rh-datagrid:11222/rest/v2/caches (Internal)
+
+curl -k -v -u developer:htKRAuhLOKKi9YXl https://<hostname>/rest/v2/caches (External)
 
 /rest/v2/caches/synccache
 
