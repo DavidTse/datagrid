@@ -7,7 +7,7 @@ metadata:
 spec:
   replicas: 2
   service:
-    type: Cache
+    type: DataGrid
     replicationFactor: 2
   autoscale:
     maxMemUsagePercent: 70
@@ -28,7 +28,7 @@ spec:
       org.infinispan: trace
       org.jgroups: trace
   expose:
-    type: Route
+    type: LoadBalancer
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
