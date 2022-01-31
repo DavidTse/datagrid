@@ -7,4 +7,4 @@ spec:
     secretName: basic-auth
   clusterName: rh-datagrid
   name: sync-cache-xml
-  template: <distributed-cache name="sync-cache-xml" owners="2" segments="256" capacity-factor="1.0" mode="SYNC" statistics="true"><expiration lifespan="600000"/><eviction strategy="LIRS" type="MEMORY" size="1000000"/><persistence><file-store/></persistence></distributed-cache>
+  template: <distributed-cache name="sync-cache-xml" owners="2" mode="SYNC" statistics="true"><memory><off-heap eviction="MEMORY" strategy="REMOVE"/></memory><partition-handling when-split="ALLOW_READ_WRITES"  merge-policy="REMOVE_ALL"/><encoding><key media-type="application/x-java-object"/><value media-type="application/json; charset=UTF-8"/></encoding><expiration lifespan="600000"/><persistence><file-store/></persistence></distributed-cache>
