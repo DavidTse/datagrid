@@ -1,0 +1,32 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    k8s-app: prometheus
+  name: datagrid-monitoring
+  namespace: openshift-monitoring
+spec:
+  endpoints:
+    - targetPort: 11222 
+      path: /metrics 
+      honorLabels: true
+      basicAuth:
+        username:
+          key: username
+          name: basic-auth 
+        password:
+          key: password
+          name: basic-auth
+      interval: 30s
+      scrapeTimeout: 10s
+      scheme: https 
+      tlsConfig:
+        insecureSkipVerify: true
+        serverName: rh-datagrid
+  namespaceSelector:
+    matchNames:
+      - dtse 
+  selector:
+    matchLabels:
+      app: infinispan-service
+      clusterName: rh-datagrid 
