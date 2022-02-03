@@ -1,0 +1,21 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDataSource
+metadata:
+  name: grafanadatasource
+spec:
+  name: datasource.yaml
+  datasources:
+    - access: proxy
+      editable: true
+      isDefault: true
+      jsonData:
+        httpHeaderName1: Authorization
+        timeInterval: 5s
+        tlsSkipVerify: true
+      name: Prometheus
+      secureJsonData:
+        httpHeaderValue1: >-
+          Bearer
+          eyJhbGciOiJSUzI1NiIsImtpZCI6ImpGZE5BNVZ0eWZmaGN3RE9CbkdmZjNVdjhQRnFXMmJpenNDWHh0TnNVU28ifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkdHNlIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImluZmluaXNwYW4tbW9uaXRvcmluZy10b2tlbi04bDk0bCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJpbmZpbmlzcGFuLW1vbml0b3JpbmciLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJhZDBmOGJjNS0yOWM2LTQwODctOTY2Yy0wNzhkN2Q3YzEwMjMiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZHRzZTppbmZpbmlzcGFuLW1vbml0b3JpbmcifQ.TDdIlZmn4yVE0CzrmNrlJ26OAg57kMTbWAAzsVv_3Id0xIAQ7WpfB-f4atZ2snIbYXenXEjfOvFVfAh0c9yQ2mdaNo1RFzFqVNV6Qd7NUEk2wOBkLLrNxtOl-uwDCC6cbSbbAQKgm82xYsJEbO827DXA3WjZUsP6fo1jG52AMoZmdW_msZgyjIKoc18eAYF3lKYRXzA78bA1hRKuc8jz9tZ-cReE6Z_f5hH2xce99EQ8O7amJKhyRrx1ZFdFy9J1sFDviu_fovaEGHR_jlFftjWblqtpJPySxwEYJi2nFOu0O1yEeSr4OaDCP2HLCOfxRj3WsusLZHpdgy60fp5Egg
+      type: prometheus
+      url: 'https://thanos-querier.openshift-monitoring.svc.cluster.local:9091'

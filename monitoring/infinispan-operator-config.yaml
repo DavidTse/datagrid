@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: infinispan-operator-config
 data:
-  grafana.dashboard.namespace: datagrid
+  grafana.dashboard.namespace: dtse
   grafana.dashboard.name: infinispan
   grafana.dashboard.monitoring.key: middleware
 
