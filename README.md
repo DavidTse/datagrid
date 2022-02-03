@@ -1,15 +1,13 @@
 # Datagrid Installation
 oc new-project datagrid
 
-oc apply -f rh-datagrid-route.yaml
+oc apply -f openshift/rh-datagrid-route.yaml
 
-oc apply -f async-cache.yaml
+oc apply -f openshift/async-cache.yaml
 
-oc apply -f sync-cache.yaml
+oc apply -f openshift/sync-cache.yaml
 
-oc apply -f batch-cache.yaml
-
-oc apply -f sync-cache-xml.yaml (work in progress)
+oc apply -f openshift/batch-cache.yaml
 
 oc get svc
 
