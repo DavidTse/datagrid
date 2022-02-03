@@ -32,7 +32,7 @@ curl -k -v -u developer:htKRAuhLOKKi9YXl https://rh-datagrid:11222/rest/v2/cache
 
 More examples are in https://access.redhat.com/documentation/en-us/red_hat_data_grid/8.2/html/data_grid_rest_api/rest_v2_api#rest_v2_cache_detail
 
-# Test Outside DMZ (External)
+# Test Outside DMZ (Route)
 curl -X POST -k -v -u developer:zFmzFUjYVgrvSUuh https://$hostname/rest/v2/caches/sync-cache/new 
 -H "Key-Content-Type: application/x-java-object;type=java.lang.String" 
 -d '{"new": "world"}'
