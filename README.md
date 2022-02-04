@@ -15,7 +15,8 @@ oc get route
 
 # Credentials
 get username & password from rh-datagrid-generated-secret (<cluster-name>-generated-secret)
-OpenShift Console-><namespace>->Workload->Secret
+  
+OpenShift Console->namespace->Workload->Secret
 
 # Accessing Data Grid REST API within OpenShift
 Go to a terminal in a pod, e.g.,  rh-datagrid-0
