@@ -10,7 +10,7 @@ import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.infinispan.client.hotrod.configuration.ConfigurationBuilder;
 
 /**
- * The Hot Rod transaction simple tutorial.for Data Grid deployed in OpenShift
+ * The Hot Rod transaction simple tutorial for Data Grid deployed in OpenShift
  * <p>
  * see https://infinispan.org/docs/13.0.x/titles/hotrod_java/hotrod_java.html#hotrod-client-configuration_hotrod-java-client
  * & https://github.com/redhat-developer/redhat-datagrid-tutorials
@@ -23,7 +23,7 @@ import org.infinispan.client.hotrod.configuration.ConfigurationBuilder;
  *
  * default hotrod-client.properties provided in the classpath does not include transaction
  *
- * @author David Tse
+ * @author David Tse, Pedro Ruivo
  */
 public class InfinispanRemoteTx
 {
