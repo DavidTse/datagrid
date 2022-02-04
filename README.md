@@ -14,10 +14,10 @@ oc get svc
 oc get route
 
 # Credentials
-get username & password from rh-datagrid-generated-secret
+get username & password from rh-datagrid-generated-secret (<cluster-name>-generated-secret)
+OpenShift Console-><namespace>->Workload->Secret
 
-
-# Test Behind DMZ (Internal)
+# Accessing Data Grid REST API within OpenShift
 Go to a terminal in a pod, e.g.,  rh-datagrid-0
 
 curl -k -v -u developer:htKRAuhLOKKi9YXl https://rh-datagrid:11222/rest/v2/caches
