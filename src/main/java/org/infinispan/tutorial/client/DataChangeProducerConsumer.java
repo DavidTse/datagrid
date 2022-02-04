@@ -6,7 +6,7 @@ import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 
 /**
- * Usage example for {@link DataChangeProducerConsumer}.
+ * Usage example for {@link DataChangeMonitor}.
  *
  * @author David Tse
  */
