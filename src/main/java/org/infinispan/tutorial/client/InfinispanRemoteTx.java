@@ -9,6 +9,22 @@ import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.infinispan.client.hotrod.configuration.ConfigurationBuilder;
 
+/**
+ * The Hot Rod transaction simple tutorial.for Data Grid deployed in OpenShift
+ * <p>
+ * see https://infinispan.org/docs/13.0.x/titles/hotrod_java/hotrod_java.html#hotrod-client-configuration_hotrod-java-client
+ * & https://github.com/redhat-developer/redhat-datagrid-tutorials
+ * <p>
+ * Hot Rod Transactions are available as of Infinispan version 9.3.
+ *
+ * Infinispan Server includes a default property realm that requires authentication.
+ * OpenShift automatically create default credentials & tls cert
+ * see Credentials & Accessing Hot Rod API for Outside DMZ (via Route) in README.md
+ *
+ * default hotrod-client.properties provided in the classpath does not include transaction
+ *
+ * @author David Tse
+ */
 public class InfinispanRemoteTx
 {
     public static void main(String[] args)

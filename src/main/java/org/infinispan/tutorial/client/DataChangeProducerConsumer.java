@@ -5,6 +5,11 @@ import java.util.Random;
 import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 
+/**
+ * Usage example for {@link DataChangeProducerConsumer}.
+ *
+ * @author David Tse
+ */
 public class DataChangeProducerConsumer
 {
     public static void main(String[] args)
