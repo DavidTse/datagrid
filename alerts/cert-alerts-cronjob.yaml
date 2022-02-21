@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: markets-cert-alerts
+  name: tls-cert-alerts
   namespace: openshift-monitoring
 spec:
   # cron job is scheduled based on UTC 9:30 EST Mon to Fri

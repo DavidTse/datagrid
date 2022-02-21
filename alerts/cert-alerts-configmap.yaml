@@ -4,7 +4,7 @@ metadata:
   name: configmap-template
   annotations:
     description: >-
-      A configmap for alert manager to run a cronjob for alerting expiring certs in ${ALERT_CERTS_NAMESPACE}
+      A configmap for alert manager to run a cronjob for alerting expiring certs in the specify namespace
       Run with oc process -f cert-alerts-configmap.yaml -p ALERT_CERTS_NAMESPACE=app-qa | oc apply -f -
 objects:
 - apiVersion: v1
@@ -35,7 +35,7 @@ objects:
         cur_epoch=`date +%s`
         expire=`echo $(( ($epoch - $cur_epoch )/(60*60*24) ))`
         
-        if [ 30 \> $expire ]; 
+        if [ 31 \> $expire ]; 
         then 
           echo "$certName in namespace $namespace expire in $expire days"; 
           oc exec -n openshift-monitoring alertmanager-main-0 -- curl -s -H "Content-Type: application/json" -d "[{\"status\":\"firing\",\"labels\":{\"alertname\":\"cert-expiring\",\"job\":\"script-alert\",\"severity\":\"critical\"},\"annotations\":{\"title\":\"x509 Certificate Expiring\",\"description\":\"$certName in namespace $namespace expiring in $expiring days.\"}}]" http://localhost:9093/api/v1/alerts
