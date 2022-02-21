@@ -38,14 +38,14 @@ objects:
         if [ 30 \> $expire ]; 
         then 
           echo "$certName in namespace $namespace expire in $expire days"; 
-          oc exec -n openshift-monitoring alertmanager-main-0 -- curl -s -H "Content-Type: application/json" -d "[{\"status\":\"firing\",\"labels\":{\"alertname\":\"cert-expiring\",\"job\":\"script-alert\",\"severity\":\"critical\"},\"annotations\":{\"title\":\"x509 Certificate Expiring\",\"description\":\"$cert_name expiring in namespace $namespace in $expiring_day days.\"}}]" http://localhost:9093/api/v1/alerts
+          oc exec -n openshift-monitoring alertmanager-main-0 -- curl -s -H "Content-Type: application/json" -d "[{\"status\":\"firing\",\"labels\":{\"alertname\":\"cert-expiring\",\"job\":\"script-alert\",\"severity\":\"critical\"},\"annotations\":{\"title\":\"x509 Certificate Expiring\",\"description\":\"$certName in namespace $namespace expiring in $expiring days.\"}}]" http://localhost:9093/api/v1/alerts
         else 
           echo "Ignore"; 
         fi;
       }
       
       # To declare static Array
-      certs=(grpc-certificate-tls:crt rest-client-cert:REST_CLIENT_CERT)
+      certs=(certificate-tls:crt rest-client-cert:REST_CLIENT_CERT)
       i=0
       # namespace=$1
       # Loop upto size of array
