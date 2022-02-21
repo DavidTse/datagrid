@@ -4,7 +4,8 @@ metadata:
   name: markets-cert-alerts
   namespace: openshift-monitoring
 spec:
-  schedule: '0 0 9 * *'
+  # cron job is scheduled based on UTC 9:30 EST Mon to Fri
+  schedule: '30 14 * * 1-5'
   concurrencyPolicy: Replace
   suspend: false
   jobTemplate:
@@ -21,8 +22,8 @@ spec:
           terminationGracePeriodSeconds: 30
           securityContext: {}
           containers:
-            - name: markets-cert-alerts
-              image: 'registry.redhat.io/openshift4/ose-cli:v4.9'
+            - name: tls-cert-alerts
+              image: 'registry.redhat.io/openshift4/ose-tools-rhel8:v4.9'
               command:
                 - /bin/sh
                 - /configmap/cert-alerts-check.sh
@@ -37,7 +38,7 @@ spec:
           volumes:
             - name: configmap
               configMap:
-                name: markets-cert-alerts
+                name: tls-cert-alerts
                 defaultMode: 420
           dnsPolicy: ClusterFirst
   successfulJobsHistoryLimit: 1
