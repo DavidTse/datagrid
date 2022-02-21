@@ -1,0 +1,68 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: configmap-template
+  annotations:
+    description: >-
+      A configmap for alert manager to run a cronjob for alerting expiring certs in ${ALERT_CERTS_NAMESPACE}
+      Run with oc process -f cert-alerts-configmap.yaml -p ALERT_CERTS_NAMESPACE=app-qa | oc apply -f -
+objects:
+- apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: tls-cert-alerts
+    namespace: openshift-monitoring
+  data:
+    cert-alerts-check.sh: |-
+      # !/bin/bash
+      set -x
+      checkCert() {
+        certName=$1
+        certKey=$2
+        namespace=${ALERT_CERTS_NAMESPACE}
+        echo $certName
+        oc get secret $certName -n $namespace -o yaml | grep $certKey | awk '{print $2}' | base64 -d > /tmp/$certName.pem
+        CDate=`openssl x509 -in /tmp/$certName.pem -noout -enddate | awk '{split($0,a,"="); print a[2]}'`
+        CDate1=`printf '%s' $CDate | awk '{split($0,a,":"); print a[1]}'`
+        index2=`expr length "${CDate1}"`
+        index=`expr $index2 - 2`
+        CDate2=`printf '%s' $CDate | awk '{split($0,a,":"); print a[3]}'`
+        month=`printf '%s' $CDate1 | cut -c1-3`
+        day=`printf '%s' $CDate1 | cut -c4-$index`
+        year=`printf '%s' $CDate2 | cut -c3-6`
+        EDate=`printf '%s %s %s' $month $day $year`
+        epoch=$(date -d "${EDate}" +"%s")
+        cur_epoch=`date +%s`
+        expire=`echo $(( ($epoch - $cur_epoch )/(60*60*24) ))`
+        
+        if [ 30 \> $expire ]; 
+        then 
+          echo "$certName in namespace $namespace expire in $expire days"; 
+          oc exec -n openshift-monitoring alertmanager-main-0 -- curl -s -H "Content-Type: application/json" -d "[{\"status\":\"firing\",\"labels\":{\"alertname\":\"cert-expiring\",\"job\":\"script-alert\",\"severity\":\"critical\"},\"annotations\":{\"title\":\"x509 Certificate Expiring\",\"description\":\"$cert_name expiring in namespace $namespace in $expiring_day days.\"}}]" http://localhost:9093/api/v1/alerts
+        else 
+          echo "Ignore"; 
+        fi;
+      }
+      
+      # To declare static Array
+      certs=(grpc-certificate-tls:crt rest-client-cert:REST_CLIENT_CERT)
+      i=0
+      # namespace=$1
+      # Loop upto size of array
+      # starting from index, i=0
+      while [ $i -lt ${#certs[@]} ]
+      do
+          # To print index, ith
+          # element
+          
+          certName=`printf '%s' ${certs[$i]} | awk '{split($0,a,":"); print a[1]}'`
+          certKey=`printf '%s' ${certs[$i]} | awk '{split($0,a,":"); print a[2]}'`
+          checkCert $certName $certKey
+          
+          # Increment the i = i + 1
+          i=`expr $i + 1`
+      done
+      exit 0
+parameters:
+- name: ALERT_CERTS_NAMESPACE
+  description: the name for the build env

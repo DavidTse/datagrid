@@ -1,0 +1,27 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: rolebinding-template
+  annotations:
+    description: >-
+      A RoleBinding for alert manager to run a cronjob retrieving a secret in the specify namespace
+      Run with oc process -f cert-alerts-cronjob-rolebinding.yaml -p ALERT_CERTS_NAMESPACE=app-qa | oc apply -f -
+objects:
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: RoleBinding
+  metadata:
+    name: alertmanager-main-${CLUSTER_ROLE}
+    namespace: ${ALERT_CERTS_NAMESPACE}
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: ${CLUSTER_ROLE}
+  subjects:
+  - kind: ServiceAccount
+    name: alertmanager-main
+    namespace: openshift-monitoring
+parameters:
+- name: ALERT_CERTS_NAMESPACE
+  description: the name for the build env
+- name: CLUSTER_ROLE
+  description: edit or view

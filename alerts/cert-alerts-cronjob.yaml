@@ -1,0 +1,44 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: markets-cert-alerts
+  namespace: openshift-monitoring
+spec:
+  schedule: '0 0 9 * *'
+  concurrencyPolicy: Replace
+  suspend: false
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: alertmanager-main
+          schedulerName: default-scheduler
+          terminationGracePeriodSeconds: 30
+          securityContext: {}
+          containers:
+            - name: markets-cert-alerts
+              image: 'registry.redhat.io/openshift4/ose-cli:v4.9'
+              command:
+                - /bin/sh
+                - /configmap/cert-alerts-check.sh
+              resources: {}
+              volumeMounts:
+                - name: configmap
+                  mountPath: /configmap
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+              imagePullPolicy: IfNotPresent
+          serviceAccount: alertmanager-main
+          volumes:
+            - name: configmap
+              configMap:
+                name: markets-cert-alerts
+                defaultMode: 420
+          dnsPolicy: ClusterFirst
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
