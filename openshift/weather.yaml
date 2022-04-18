@@ -5,7 +5,7 @@ metadata:
 spec:
   adminAuth:
     secretName: basic-auth
-  clusterName: rhdg
+  clusterName: rh-datagrid
   name: weather
   template: >-
     <distributed-cache name="weather" remote-timeout="17500">
