@@ -59,7 +59,7 @@ curl -k -v -u developer:htKRAuhLOKKi9YXl https://$hostname/rest/v2/caches/sync-c
 # Accessing Hot Rod API for Outside DMZ (via Route)
 Certificate & Truststore
 
-rh-datagrid-cert-secret (crt & key, <cluster-name>-cert-secret, OpenShift Console-><namespace>->Workload->Secret)
+rh-datagrid-cert-secret (crt & key, ${cluster-name}-cert-secret, OpenShift Console->${namespace}->Workload->Secret)
 
 cat tls.crt | openssl x509 -noout -enddate
 
