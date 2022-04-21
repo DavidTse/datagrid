@@ -1,7 +1,14 @@
+# Datagrid-Operator Installation
+git clone git@github.com:alvarolop/rhdg8-server.git
+cd rhdg8-server
+oc process -f rhdg-operator/rhdg-01-operator.yaml | oc apply -f -
+
 # Datagrid Installation
-oc new-project datagrid
+oc project rhdg8
 
 oc apply -f openshift/rh-datagrid-route.yaml
+
+The following are optionals but you will need at least one
 
 oc apply -f openshift/async-cache.yaml
 
@@ -9,12 +16,17 @@ oc apply -f openshift/sync-cache.yaml
 
 oc apply -f openshift/batch-cache.yaml
 
+oc apply -f openshift/temperature.yaml
+
+oc apply -f openshift/weather.yaml
+
+
 oc get svc
 
 oc get route
 
 # Credentials
-get username & password from rh-datagrid-generated-secret (<cluster-name>-generated-secret)
+get username & password from rh-datagrid-generated-secret (${cluster-name}-generated-secret)
   
 OpenShift Console->namespace->Workload->Secret
 
