@@ -1,6 +1,8 @@
 # Datagrid-Operator Installation
 git clone git@github.com:alvarolop/rhdg8-server.git
+
 cd rhdg8-server
+
 oc process -f rhdg-operator/rhdg-01-operator.yaml | oc apply -f -
 
 # Datagrid Installation
