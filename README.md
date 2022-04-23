@@ -12,6 +12,8 @@ oc apply -f openshift/rh-datagrid-route.yaml
 
 The following are optionals but you will need at least one
 
+oc apply -f openshift/sessions.yaml
+
 oc apply -f openshift/async-cache.yaml
 
 oc apply -f openshift/sync-cache.yaml
@@ -71,3 +73,4 @@ hotrod-client.properties (must be in the classpath, see src/main/resources)
 
 RemoteCacheManager remoteCacheManager = new RemoteCacheManager();
 
+Spring-boot app tested using codes from https://github.com/redhat-developer/redhat-datagrid-tutorials/blob/RHDG_8.3.0/integrations/spring-boot/cache-remote
