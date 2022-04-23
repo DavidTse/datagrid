@@ -10,4 +10,5 @@ spec:
   template: >-
     <distributed-cache name="sessions" statistics="true">
       <encoding media-type="application/x-protostream"/>
+      <expiration lifespan="1800000"/> <!-- 30 min -->
     </distributed-cache>
