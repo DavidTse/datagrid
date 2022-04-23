@@ -1,0 +1,13 @@
+apiVersion: infinispan.org/v2alpha1
+kind: Cache
+metadata:
+  name: sessions
+spec:
+  adminAuth:
+    secretName: basic-auth
+  clusterName: rh-datagrid
+  name: sessions
+  template: >-
+    <distributed-cache name="sessions">
+      <encoding media-type="application/x-protostream"/>
+    </distributed-cache>
