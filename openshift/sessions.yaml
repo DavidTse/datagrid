@@ -8,6 +8,6 @@ spec:
   clusterName: rh-datagrid
   name: sessions
   template: >-
-    <distributed-cache name="sessions">
+    <distributed-cache name="sessions" statistics="true">
       <encoding media-type="application/x-protostream"/>
     </distributed-cache>
