@@ -49,7 +49,7 @@ curl -k -v -u developer:htKRAuhLOKKi9YXl https://rh-datagrid:11222/rest/v2/cache
 
 More examples are in https://access.redhat.com/documentation/en-us/red_hat_data_grid/8.2/html/data_grid_rest_api/rest_v2_api#rest_v2_cache_detail
 
-# Accessing REST API for Outside DMZ (via Route)
+# Accessing REST API from the outside of the DMZ (via Route)
 curl -X POST -k -v -u developer:zFmzFUjYVgrvSUuh https://$hostname/rest/v2/caches/sync-cache/new 
 -H "Key-Content-Type: application/x-java-object;type=java.lang.String" 
 -d '{"new": "world"}'
@@ -60,7 +60,7 @@ curl -X POST -k -v -u developer:zFmzFUjYVgrvSUuh https://$hostname/rest/v2/cache
 
 curl -k -v -u developer:htKRAuhLOKKi9YXl https://$hostname/rest/v2/caches/sync-cache/pi
 
-# Accessing Hot Rod API for Outside DMZ (via Route)
+# Accessing Hot Rod API from the outside of the DMZ (via Route)
 Certificate & Truststore
 
 rh-datagrid-cert-secret (crt & key, ${cluster-name}-cert-secret, OpenShift Console->${namespace}->Workload->Secret)
