@@ -5,16 +5,24 @@ metadata:
   annotations:
     infinispan.org/monitoring: 'true'
 spec:
-  replicas: 3
+  replicas: 2
   service:
     type: DataGrid
-    replicationFactor: 3
+    replicationFactor: 2
   autoscale:
     maxMemUsagePercent: 70
     maxReplicas: 5
     minMemUsagePercent: 30
-    minReplicas: 3
+    minReplicas: 2
   security:
+    securityRealms:
+      - name: token-realm
+        tokenRealm:
+          authServerUrl: 'https://keycloak-rhsso.apps.mcu7x5vy.eastus2.aroapp.io/auth/'
+          oauth2Introspection:
+            clientId: datagrid
+            clientSecret: '7b89dac1-6e58-4932-9487-30376c1971e5'
+            introspectionUrl: 'https://keycloak-rhsso.apps.mcu7x5vy.eastus2.aroapp.io/auth/realms/demo/protocol/openid-connect/token/introspect'
     endpointSecretName: endpoint-identities
     endpointEncryption:
         type: Secret

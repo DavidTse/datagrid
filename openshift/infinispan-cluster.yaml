@@ -5,4 +5,4 @@ metadata:
 spec:
   service:
     type: DataGrid
-  replicas: 2
+  replicas: 3
