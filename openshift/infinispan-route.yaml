@@ -1,0 +1,45 @@
+apiVersion: infinispan.org/v1
+kind: Infinispan
+metadata:
+  name: infinispan
+  annotations:
+    infinispan.org/monitoring: 'true'
+spec:
+  replicas: 3
+  upgrades:
+    type: Shutdown
+  service:
+    type: DataGrid
+  autoscale:
+    maxMemUsagePercent: 70
+    maxReplicas: 5
+    minMemUsagePercent: 30
+    minReplicas: 3
+  security:
+    endpointSecretName: endpoint-identities
+    endpointEncryption:
+        type: Secret
+        certSecretName: tls-secret
+  container:
+    extraJvmOpts: "-XX:NativeMemoryTracking=summary"
+    cpu: "2000m:1000m"
+    memory: "2Gi:1Gi"
+  logging:
+    categories:
+      org.infinispan: trace
+      org.jgroups: trace
+      org.jgroups.protocols.TCP: error
+      org.jgroups.protocols.relay.RELAY2: error
+  expose:
+    type: Route
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: infinispan-pod
+              clusterName: infinispan
+              infinispan_cr: infinispan
+          topologyKey: "kubernetes.io/hostname"
