@@ -16,7 +16,7 @@ spec:
           <binary eviction="MEMORY" size="400000000"/> <!-- 400 MB -->
         </memory>
         <expiration lifespan="600000"/> <!-- 10 min -->
-        <persistence>
+        <!-- persistence>
           <file-store/>
-        </persistence>
+        </persistence -->
       </distributed-cache>
