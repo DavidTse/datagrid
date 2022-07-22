@@ -9,7 +9,8 @@ spec:
   name: sync-cache-xml
   template: >-
       <distributed-cache name="sync-cache-xml" owners="2" mode="SYNC" statistics="true">
-        <encoding media-type="application/x-protostream"/>
+        <encoding media-type="application/x-java-object"/>
+        <!-- encoding media-type="application/x-protostream"/ -->
         <state-transfer enabled="false"/>
         <memory>
           <binary eviction="MEMORY" size="400000000"/> <!-- 400 MB -->
