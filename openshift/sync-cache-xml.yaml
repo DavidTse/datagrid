@@ -9,7 +9,10 @@ spec:
   name: sync-cache-xml
   template: >-
       <distributed-cache name="sync-cache-xml" owners="2" mode="SYNC" statistics="true">
-        <encoding media-type="application/x-java-object"/>
+        <encoding>
+          <key media-type="application/x-java-serialized-object"/>
+          <value media-type="application/x-java-serialized-object"/>
+        </encoding>
         <!-- encoding media-type="application/x-protostream"/ -->
         <state-transfer enabled="false"/>
         <memory>
