@@ -9,7 +9,10 @@ spec:
   name: jcache
   template: >-
       <distributed-cache name="jcache" owners="2" mode="SYNC" statistics="true">
-        <encoding media-type="application/x-java-serialized-object"/>
+        <encoding>
+          <key media-type="application/x-java-serialized-object"/>
+          <value media-type="application/x-java-serialized-object"/>
+        </encoding>
         <!-- encoding media-type="application/x-protostream"/ -->
         <state-transfer enabled="false"/>
         <memory>
