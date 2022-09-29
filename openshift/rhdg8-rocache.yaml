@@ -1,0 +1,69 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: rhdg8-rocaches
+  annotations:
+    description: Template to configure caches inside a RHDG cluster on OCP.
+    tags: infinispan,datagrid,operator
+    iconClass: icon-datagrid
+    openshift.io/provider-display-name: Red Hat, Inc.
+    openshift.io/support-url: https://access.redhat.com
+objects:
+- apiVersion: infinispan.org/v2alpha1
+  kind: Cache
+  metadata:
+    name: ${CACHE_NAME}
+    namespace: ${CLUSTER_NAMESPACE}
+    labels:
+      type: middleware
+  spec:
+    adminAuth:
+      secretName: basic-auth
+    clusterName: ${CLUSTER_NAME}
+    name:  ${CACHE_NAME}
+    template: >-
+      <distributed-cache name="${CACHE_NAME}" mode="SYNC" owners="2" statistics="true>
+        <encoding>
+          <key media-type="application/x-protostream"/>
+          <value media-type="application/x-protostream"/>
+        </encoding>
+        <partition-handling when-split="ALLOW_READ_WRITES" merge-policy="REMOVE_ALL"/>
+        <persistence>
+          <query-jdbc-store xmlns="urn:infinispan:config:store:sql:13.0"
+                      dialect="ORACLE"
+                      shared="true"
+                      read-only="true"
+                      key-columns="strKey">
+            <data-source jndi-url="java:/${DS_NAME}"/>
+            <queries
+              select-single="SELECT t1.strKey, t1.timestamp, t1.value FROM ${VIEW_PREFIX}_${TABLE_NAME} t1 WHERE t1.strKey = :strKey"
+              select-all="SELECT t1.strKey, t1.timestamp, t1.value FROM ${VIEW_PREFIX}_${TABLE_NAME} t1"
+              size="SELECT COUNT(*) FROM ${VIEW_PREFIX}_${TABLE_NAME}"
+            />
+            <schema message-name="cache_value"
+                    package="library"
+                    embedded-key="false"/>
+          </query-jdbc-store>
+        </persistence>
+      <distributed-cache>
+parameters:
+- name: CLUSTER_NAMESPACE
+  description: "The project where the RHDG cluster reside."
+  required: false
+  value: "rhdg8"
+- name: CLUSTER_NAME
+  description: "The name of the RHDG cluster."
+  required: false
+  value: "rhdg"
+- name: TABLE_NAME
+  description: "The name of the DB table."
+  required: false
+  value: "table"
+- name: VIEW_PREFIX
+  description: "The prefix of the DB view."
+  required: false
+  value: "V"
+- name: DS_NAME
+  description: "The name of the DataSource."
+  required: false
+  value: "OracleDS"
